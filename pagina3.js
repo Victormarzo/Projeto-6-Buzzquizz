@@ -1,9 +1,24 @@
+let pagina = document.querySelector('.page')
 let quizzCriado = false
 
 
 
 function abrePagina3() {
-    alert('ainda não esta pronta')
+    pagina.innerHTML =
+        `
+    <div class="pagina3">
+            <h1>Começando pelo começo</h1>
+            <div class="caixa-defineQuizz">
+                <div>
+                    <input placeholder="Título do seu quizz" type="text">
+                    <input placeholder="URL da imagem do seu quizz" type="text">
+                    <input placeholder="Quantidade de perguntas do quizz" type="text">
+                    <input placeholder="Quantidade de níveis do quizz" type="text">
+                </div>
+            </div>
+            <div onclick="crieSuasPerguntas()" class="button">Prosseguir para criar perguntas</div>
+        </div>
+    `
 }
 
 function crieSuasPerguntas() {
