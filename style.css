@@ -10,7 +10,6 @@ body {
 }
 
 .page {
-
     width: 80%;
     height: 600px;
     margin: 70px auto 0px auto;
@@ -37,12 +36,13 @@ body {
 
 .button-container {
     width: 100%;
-    height: 180px;
+    height: 200px;
     margin-top: 160px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 1px dashed #D4D4D4;
 }
 
 .button-container p {
@@ -56,7 +56,6 @@ body {
     height: 107px;
     padding: 20px;
     text-align: center;
-
 }
 
 .button-container button {
