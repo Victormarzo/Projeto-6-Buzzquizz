@@ -39,10 +39,31 @@ body {
 
 /* Design pagina1: */
 
+.pagina1 {
+    margin-top: 80px;
+    display: flex;
+    justify-content: start;
+}
+.pagina1 .small-button {
+    display: flex;
+    align-items: center;
+    margin-top: 77px;
+}
+.pagina1 h1 {
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.pagina1 ion-icon {
+    margin-left: 10px;
+    width: 30px;
+    height: 31px;
+    color: #EC362D;
+}
 .button-container {
     width: 100%;
     height: 200px;
-    margin-top: 160px;
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -90,7 +111,12 @@ body {
     margin-top: 140px;
     margin-bottom: 36px;
 }
-
+.caixa-defineQuizz {
+    width: 600px;
+    padding: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+}
 .caixa-pergunta {
     width: 600px;
     padding: 16px;
@@ -106,7 +132,7 @@ body {
     margin-top: 28px;
 }
 
-.caixa-pergunta input {
+.caixa-pergunta input, .caixa-defineQuizz input {
     width: 564px;
     height: 42px;
     margin-top: 12px;
