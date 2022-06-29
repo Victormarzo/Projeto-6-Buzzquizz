@@ -2,17 +2,20 @@
 
 * {
     box-sizing: border-box;
+    font-family: 'Roboto';
 }
 
 html,
 body {
     background-color: #FAFAFA;
+    display: flex;
+    justify-content: center;
 }
 
 .page {
-    width: 80%;
-    height: 600px;
-    margin: 70px auto 0px auto;
+    width: 1051px;
+    height: 3000px;
+
 }
 
 .banner {
@@ -33,6 +36,8 @@ body {
     width: 174px;
     height: 43px;
 }
+
+/* Design pagina1: */
 
 .button-container {
     width: 100%;
@@ -66,4 +71,62 @@ body {
     border: 1px dashed #EC362D;
     color: #EC362D;
 
+}
+
+/* Design pagina3: */
+
+.pagina3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pagina3 h1 {
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.pagina3>h1 {
+    margin-top: 140px;
+    margin-bottom: 36px;
+}
+
+.caixa-pergunta {
+    width: 600px;
+    padding: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+}
+
+.caixa-pergunta div {
+    margin-bottom: 24px;
+}
+
+.caixa-pergunta div {
+    margin-top: 28px;
+}
+
+.caixa-pergunta input {
+    width: 564px;
+    height: 42px;
+    margin-top: 12px;
+    border-radius: 5px;
+    border: 1px solid #d1d1d1;
+    font-style: italic;
+    color: #BABABA;
+    font-size: 19px;
+}
+
+.pagina3 .button {
+    margin-top: 80px;
+    width: 354px;
+    height: 54px;
+    background-color: #EC362D;
+    border-radius: 15px;
+    font-size: 22px;
+    font-weight: 400;
+    color: #FFF5F4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
