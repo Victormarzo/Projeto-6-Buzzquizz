@@ -180,20 +180,20 @@ body {
     margin-bottom: 24px;
 }
 
-.caixa-pergunta {
+.caixa-pergunta, .caixa-nivel {
     width: 600px;
     padding: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     margin-bottom: 24px;
 }
 
-.gaveta-perguntas div {
+.gaveta-perguntas div, .gaveta-niveis div {
     margin-top: 28px;
     margin-bottom: 24px;
 }
 
 .caixa-pergunta input,
-.caixa-defineQuizz input {
+.caixa-defineQuizz input, .caixa-nivel input {
     width: 564px;
     height: 42px;
     margin-top: 12px;

@@ -3,7 +3,8 @@ let quizzCriado = false
 let definicoesQuizz = []
 let qntPerg = null
 let perguntas = []
-
+let  qntNiveis = 0
+//Pagina 3.1
 function abrePagina3() {
     pagina.innerHTML =
         `
@@ -22,7 +23,7 @@ function abrePagina3() {
     `
 }
 function guardaInputs() {
-    let titulo, url, qntNiveis
+    let titulo, url
     definicoesQuizz = []
     //Pega todos os inputs:
     let inputsList = pagina.querySelectorAll('input')
@@ -35,9 +36,9 @@ function guardaInputs() {
     qntPerg = definicoesQuizz[2]
     qntNiveis = definicoesQuizz[3]
     //Passa os inputs para verificação:
-    verificaRequisitosCriacao(titulo, url, qntPerg, qntNiveis)
+    verificaRequisitosCriacao(titulo, url, qntPerg)
 }
-function verificaRequisitosCriacao(titulo, url, qntPerg, qntNiveis) {
+function verificaRequisitosCriacao(titulo, url, qntPerg) {
     let urlOK = true
     let tituloOK = false
     let qntPergOK = false
@@ -67,19 +68,19 @@ function verificaRequisitosCriacao(titulo, url, qntPerg, qntNiveis) {
 
     // Se tudo estiver ok:
     if (tituloOK === true && urlOK === true && qntPergOK === true && qntNiveisOK === true) {
-        crieSuasPerguntas(titulo, url, qntNiveis)
+        crieSuasPerguntas(titulo, url)
     }
     console.log(urlOK)
 
 }
-
-function crieSuasPerguntas(titulo, url, qntNiveis) {
+//Pagina 3.2
+function crieSuasPerguntas(titulo, url) {
     let perguntasHTML = ''
 
     for (let i = 1; i <= qntPerg; i++) {
         perguntasHTML +=
             `
-<div onclick="abreGaveta(this)" class="caixa-pergunta pergunta${i}">
+<div onclick="abreGaveta(this, 'gaveta-perguntas')" class="caixa-pergunta pergunta${i}">
                 <div class="gaveta-titulo">
                     <h1>Pergunta ${i}</h1>
                     <img src="img/createicon.svg">
@@ -125,11 +126,12 @@ function crieSuasPerguntas(titulo, url, qntNiveis) {
     document.querySelector('.gaveta-perguntas').classList.remove('hidden')
 }
 
-function abreGaveta(caixaPerguntas) {
-    let gaveta = caixaPerguntas.querySelector('.gaveta-titulo')
+function abreGaveta(caixa, caixaFechada) {
+    let gaveta = caixa.querySelector('.gaveta-titulo')
     gaveta.classList.add('hidden')
-    let perguntas = caixaPerguntas.querySelector('.gaveta-perguntas')
-    perguntas.classList.remove('hidden')
+    let caixaF = caixa.querySelector(`.${caixaFechada}`)
+    caixaF.classList.remove('hidden')
+    console.log(caixaFechada)
 }
 
 
@@ -165,6 +167,7 @@ function recebePerguntas() {
 
 function verificaRequisitosPerguntas() {
     let tudoNosConformes = 0
+    //Verifica requisitos:
     perguntas.forEach((item, indice) => {
 
         if ((item.textoDaPergunta).length < 20 && item.textoDaPergunta !== "") {
@@ -223,8 +226,7 @@ function verificaAntesPostagem() {
         }
     })
     if(tudoNosConformes == qntPerg){
-        //add função de postagem aqui:
-        alert('Postagem não está pronta')
+        crieSeusNiveis();
     }
 }
 
@@ -251,4 +253,31 @@ function isURL(url) {
     try { promessaUrl = new URL(url); } catch (_) {
         return false
     }
+}
+
+//Pagina 3.3
+
+function crieSeusNiveis(){
+pagina.html = 
+`
+<div class="pagina3">
+            <h1>Agora, decida os níveis</h1>
+            <div onclick="abreGaveta(this, 'gaveta-niveis')" class="caixa-nivel Nivel${i}">
+                <div class="gaveta-titulo">
+                    <h1>Nivel ${i}</h1>
+                    <img src="img/createicon.svg">
+                </div>
+                <div class="gaveta-niveis hidden">
+                    <div>
+                        <h1>Nivel ${i}</h1>
+                        <input placeholder="Título do nível" type="text">
+                        <input placeholder="% de acerto mínima" type="text">
+                        <input placeholder="URL da imagem do nível" type="text">
+                        <input placeholder="Descrição do nível" type="text">
+                    </div>
+                </div>
+            </div>
+            <div onclick="recebeNiveis()" class="button">Prosseguir para criar níveis</div>
+        </div>
+`
 }
