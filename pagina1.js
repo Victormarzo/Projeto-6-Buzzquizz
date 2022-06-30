@@ -11,7 +11,6 @@ function button() {
         pagina.innerHTML =
             `
             
-
             <div class="button-container">
                 <div>
                     <p>Você não criou nenhum quizz ainda :(</p>
@@ -37,7 +36,7 @@ button();
 procuraQuizz();
 
 function procuraQuizz(){
-    const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
+    const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes")
     promise.then(carregaQuizz);
     promise.catch(error);
     
@@ -46,17 +45,20 @@ function error(erro){
     console.log(erro.response.status);
 }
 function carregaQuizz(resposta){
-    pagina.innerHTML+=`<div class="quizzList">
-            
+    pagina.innerHTML+=`
+    
+    <div class="quizzTodos" <h1>Todos os Quizzes</h1></div>
+    <div class="quizzList">
+        
     </div>`
     
-    let list=document.querySelector(".quizzList")
-    for( let i=2;i<8;i++){
+    let list=document.querySelector(".quizzList");
+    for( let i=0;i<6;i++){
     list.innerHTML+= `
     
             
         
-    <div class="thumb"><div class="background"><img src="${resposta.data[i].image}"></div><p>${resposta.data[i].title} </p></div>
+    <div class="thumb" onclick="abrePagina2(${resposta.data[i].id})"><div class="background"><img src="${resposta.data[i].image}"></div><p>${resposta.data[i].title} </p></div>
     
     `
 }}
