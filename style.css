@@ -37,6 +37,7 @@ body {
     height: 43px;
 }
 
+
 /* Design pagina1: */
 
 .pagina1 {
@@ -44,11 +45,13 @@ body {
     display: flex;
     justify-content: start;
 }
+
 .pagina1 .small-button {
     display: flex;
     align-items: center;
     margin-top: 77px;
 }
+
 .pagina1 h1 {
     font-size: 23px;
     font-weight: 700;
@@ -60,6 +63,7 @@ body {
     height: 31px;
     color: #EC362D;
 }
+
 .button-container {
     width: 100%;
     height: 200px;
@@ -91,8 +95,11 @@ body {
     background-color: #FAFAFA;
     border: 1px dashed #EC362D;
     color: #EC362D;
-
 }
+.pagina1 button {
+    cursor: pointer;
+}
+/* Design pagina2: */
 
 /* Design pagina3: */
 
@@ -111,12 +118,14 @@ body {
     margin-top: 140px;
     margin-bottom: 36px;
 }
+
 .caixa-defineQuizz {
     width: 600px;
     padding: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     margin-bottom: 24px;
 }
+
 .caixa-pergunta {
     width: 600px;
     padding: 16px;
@@ -124,15 +133,13 @@ body {
     margin-bottom: 24px;
 }
 
-.caixa-pergunta div {
+.gaveta-perguntas div {
+    margin-top: 28px;
     margin-bottom: 24px;
 }
 
-.caixa-pergunta div {
-    margin-top: 28px;
-}
-
-.caixa-pergunta input, .caixa-defineQuizz input {
+.caixa-pergunta input,
+.caixa-defineQuizz input {
     width: 564px;
     height: 42px;
     margin-top: 12px;
@@ -155,4 +162,27 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.gaveta-titulo {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.gaveta-titulo:hover {
+    cursor: pointer;
+}
+
+.gaveta-titulo img {
+    width: 26px;
+    height: 23px;
+}
+.pagina3 .button:hover {
+    cursor: pointer;
+}
+
+/* Funcoes com prioridade: */
+.hidden {
+    display: none;
 }
