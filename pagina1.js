@@ -10,7 +10,7 @@ function button() {
 
         pagina.innerHTML =
             `
-            <div class="pagina1">
+            
 
             <div class="button-container">
                 <div>
@@ -18,7 +18,7 @@ function button() {
                 </div>
                 <button onclick="abrePagina3()">Criar Quizz</button>
             </div>
-        </div>
+        
         `
     }
     else {
@@ -34,3 +34,29 @@ function button() {
     }
 }
 button();
+procuraQuizz();
+
+function procuraQuizz(){
+    const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
+    promise.then(carregaQuizz);
+    promise.catch(error);
+    
+}
+function error(erro){
+    console.log(erro.response.status);
+}
+function carregaQuizz(resposta){
+    pagina.innerHTML+=`<div class="quizzList">
+            
+    </div>`
+    
+    let list=document.querySelector(".quizzList")
+    for( let i=2;i<8;i++){
+    list.innerHTML+= `
+    
+            
+        
+    <div class="thumb"><div class="background"><img src="${resposta.data[i].image}"></div><p>${resposta.data[i].title} </p></div>
+    
+    `
+}}
