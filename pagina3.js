@@ -5,6 +5,10 @@ let qntPerg = null
 let perguntas = []
 let niveis = []
 let qntNiveis = 0
+let quest=resposta.data.questions;
+    let resp=resposta.data.questions.answers;
+
+
 //Pagina 3.1
 function abrePagina3() {
     pagina.innerHTML =
