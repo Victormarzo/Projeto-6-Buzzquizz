@@ -8,17 +8,20 @@ function abrePagina2(elemento){
 function error(erro){
     console.log(erro.response.status);
 }
-
+function comparador() { 
+	return Math.random() - 0.5; 
+}
 function exibeQuizz(resposta){
     let titulo=document.querySelector(".caixaTituloQuizz");
     let quest=resposta.data.questions;
     let resp=resposta.data.questions.answers;
+    let listaResposta =[];
     console.log(resposta);
     titulo.innerHTML=
     
     `
     <div class="tituloQuizz">
-    <div class="caixaTitulo">
+    <div class="caixaTitulo opaco">
         <img src="${resposta.data.image}" >
         <p>${resposta.data.title}</p>
     </div>
@@ -37,13 +40,14 @@ function exibeQuizz(resposta){
         </div>
         
         `
-        
-
+        let perguntaQ=document.querySelector(`.caixa${i} .perguntaQuizz`);
+            perguntaQ.style.background=`${quest[i].color}`;
+        let caixaQ=document.querySelector(`.caixa${i}`);
 
         for(let y=0;y<quest[i].answers.length;y++){
             
-            let caixaQ=document.querySelector(`.caixa${i}`);
-            caixaQ.innerHTML+=
+            
+            respostaTemplate =
             `
             <div class="opcao ">
             <img src="${quest[i].answers[y].image}" >
@@ -52,8 +56,13 @@ function exibeQuizz(resposta){
             `
             
 
+            listaResposta.push(respostaTemplate);
         }
+        listaResposta.sort(comparador);
+        for(let c=0;c<listaResposta.length;c++){
+        caixaQ.innerHTML += listaResposta[c];
         
+    }listaResposta=[];
     }
 
 
