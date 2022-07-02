@@ -1,7 +1,7 @@
 let pagina = document.querySelector('.page')
 let quizzCriado = false
 let definicoesQuizz = []
-let qntPerg = null
+let qntPerg = 0
 let perguntas = []
 let niveis = []
 let qntNiveis = 0
@@ -62,7 +62,7 @@ function verificaRequisitosCriacao(titulo, url, qntPerg) {
 
     if (qntPerg >= 3) {
         qntPergOK = true
-    } else if (qntPerg === "") { return } else { alert('Deve-se ter no mínimo três perguntas.') }
+    } else if (qntPerg === "") { return } else { alert('A quantidade de perguntas deve ter no mínimo três perguntas.') }
 
     if (qntNiveis >= 2) {
         qntNiveisOK = true
@@ -89,9 +89,12 @@ function crieSuasPerguntas(titulo, url) {
                 </div>
                 <div class="gaveta-perguntas hidden">
                     <div>
-                        <h1>Pergunta ${i}</h1>
+                        <h1>Pergunta ${i}</h1> 
                         <input placeholder="Texto da pergunta" type="text">
-                        <input placeholder="Cor de fundo da pergunta" type="text">
+                        <div onclick="trocaInput(this)" class="input-change">
+                        <p> Alternar input </p> <ion-icon name="eyedrop"></ion-icon>
+                        </div>
+                        <input placeholder="Cor de fundo da pergunta" type="text" class= "input-color">
                     </div>
                     <div>
                         <h1>Resposta correta</h1>
@@ -127,6 +130,15 @@ function crieSuasPerguntas(titulo, url) {
     document.querySelector('.gaveta-titulo').classList.add('hidden')
     document.querySelector('.gaveta-perguntas').classList.remove('hidden')
     scrollTop();
+}
+function trocaInput(inputCLKD) {
+    parentNode = inputCLKD.parentNode
+    if (parentNode.querySelector('.input-color').type === "color") {
+        parentNode.querySelector('.input-color').type = "text"
+    }
+    else {
+        parentNode.querySelector('.input-color').type = "color"
+    }
 }
 
 function abreGaveta(caixa, caixaFechada) {
@@ -192,6 +204,24 @@ function verificaRequisitosPerguntas() {
         if ((item.urlDaImagem3 !== "") && (isURL(item.urlDaImagem3) === false)) {
             alert(`O link da imagem da resposta incorreta(3) na pergunta ${indice + 1} não é válido.`)
         }
+        if (item.respostaCorreta !== "" && item.urlDaImagem === "") {
+            alert(`Erro na pergunta(${indice + 1}): Adicione um URL. `)
+        }
+        if (item.respostaIncorreta1 !== "" && item.urlDaImagem1 === "") {
+            alert(`Erro na pergunta(${indice + 1}): Adicione um URL na resposta incorreta 1. `)
+        }
+        if (item.respostaIncorreta2 !== "" && item.urlDaImagem2 === "") {
+            alert(`Erro na pergunta(${indice + 1}): Adicione um URL na resposta incorreta 2. `)
+        }
+        if (item.respostaIncorreta3 !== "" && item.urlDaImagem3 === "") {
+            alert(`Erro na pergunta(${indice + 1}): Adicione um URL na resposta incorreta 3. `)
+        }
+        if (item.textoDaPergunta === "" && (item.respostaCorreta !== "" || item.respostaIncorreta1 !== "")) {
+            alert(`Erro na pergunta(${indice + 1}): veja o campo de texto da pergunta e tente novamente. `)
+        }
+        if (item.corDeFundoDaPergunta === "" && (item.textoDaPergunta !== "" || item.respostaCorreta !== "" || item.respostaIncorreta1 !== "")) {
+            alert(`Erro na pergunta(${indice + 1}): adicione uma cor de fundo. `)
+        }
         else {
             // adiciona +1 pra cada caixa de pergunta preenchida corretamente
             tudoNosConformes++
@@ -201,9 +231,6 @@ function verificaRequisitosPerguntas() {
     if (tudoNosConformes == qntPerg) {
 
         verificaAntesPostagem()
-    }
-    else {
-        alert('Algo deu errado, verifique as caixas de texto.')
     }
 }
 function verificaAntesPostagem() {
@@ -220,7 +247,9 @@ function verificaAntesPostagem() {
     if (tudoNosConformes == qntPerg) {
         crieSeusNiveis();
     }
-    else ('Algo deu errado...')
+    else {
+        alert('Algo deu errado, veja os campos e tente novamente...')
+    }
 }
 
 function verificaHexadecimial(cor) {
@@ -319,24 +348,29 @@ function verificaNiveis() {
         if (item.acertoMinimo !== "" && (item.acertoMinimo > 100 || item.acertoMinimo < 0)) {
             alert(`Erro no nivel(${index + 1}): O numero deve estar entre 0 e 100. `)
         }
-        if (item.urlDaImagem !== "" && (isURL(item.urlDaImagem) === false)){
+        if (item.urlDaImagem !== "" && (isURL(item.urlDaImagem) === false)) {
             alert(`Erro no nivel(${index + 1}): Deve inserir um URL válido. `)
         }
-        if (item.descNivel !== "" && item.descNivel.length < 30){
+        if (item.descNivel !== "" && item.descNivel.length < 30) {
             alert(`Erro no nivel(${index + 1}): A descrição deve ter mais que 30 caracteres. `)
         }
-        if (item.acertoMinimo !== "" && (item.acertoMinimo == 0)){
+        if (item.tituloDoNivel !== "" && item.urlDaImagem === "") {
+            alert(`Erro no nivel(${index + 1}): Adicione um URL. `)
+        }
+        if (item.descNivel === "" && (item.acertoMinimo !== "" || item.tituloDoNivel !== "" || item.urlDaImagem !== "")) {
+            alert(`Erro no nivel(${index + 1}): Adicione uma descrição. `)
+        }
+        if (item.acertoMinimo !== "" && (item.acertoMinimo == 0)) {
             tudoNosConformes++
             umNivel0 = true
+            return
         }
-        else {tudoNosConformes++}
+        else { tudoNosConformes++ }
     })
-    console.log(umNivel0)
-    if(umNivel0 === false){
+    if (umNivel0 === false) {
         alert('Deve haver ao menos um nivel com 0% de acerto mínimo.')
     }
-    if(tudoNosConformes === qntNiveis && umNivel0 === true){
+    if (tudoNosConformes == qntNiveis && umNivel0 === true) {
         alert('tudo certo')
     }
-    //duvida: sera que deve ser necessario colocar imagem?
 }

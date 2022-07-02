@@ -17,7 +17,6 @@ body {
 .page {
     width: 1051px;
     height: 3000px;
-
 }
 
 .banner {
@@ -270,7 +269,18 @@ body {
     margin-top: 28px;
     margin-bottom: 24px;
 }
-
+.gaveta-perguntas .input-change {
+    margin-top: 20px;
+    margin-bottom: 0;
+    display: flex;
+}
+.input-change p {
+    margin-right: 5px;
+}
+.input-change:hover {
+    color: red;
+    cursor: pointer;
+}
 .caixa-pergunta input,
 .caixa-defineQuizz input, .caixa-nivel input {
     width: 564px;
@@ -319,5 +329,16 @@ body {
 /* Funcoes com prioridade: */
 .hidden {
     display: none;
+}
+/* Chrome, Safari, Edge, Opera  RETIRA ARROWS DO INPUT DE NUMERO*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox RETIRA ARROWS DO INPUT DE NUMERO*/
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
