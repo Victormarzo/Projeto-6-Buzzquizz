@@ -241,7 +241,15 @@ body {
     margin-bottom: 20px;
     width: 320px;
 }
-
+.vermelho{
+    color: red;
+}
+.verde{
+    color:green;
+}
+.branco{
+    opacity: 0.3;
+}
 
 
 

@@ -12,6 +12,7 @@ function comparador() {
 	return Math.random() - 0.5; 
 }
 function exibeQuizz(resposta){
+    
     let titulo=document.querySelector(".caixaTituloQuizz");
     let quest=resposta.data.questions;
     let resp=resposta.data.questions.answers;
@@ -35,7 +36,7 @@ function exibeQuizz(resposta){
         
         listaQ.innerHTML+=
         `            
-        <div class="caixaQuizz caixa${[i]}">
+        <div class="caixaQuizz caixa${[i]} naoClicado">
             <div class="perguntaQuizz "><p>${quest[i].title}</p></div>
         </div>
         
@@ -49,7 +50,7 @@ function exibeQuizz(resposta){
             
             respostaTemplate =
             `
-            <div class="opcao ">
+            <div class="opcao ${quest[i].answers[y].isCorrectAnswer} " onclick="escolheOpcao(this)">
             <img src="${quest[i].answers[y].image}" >
             <p>${quest[i].answers[y].text}</p>
             </div>
@@ -65,5 +66,36 @@ function exibeQuizz(resposta){
     }listaResposta=[];
     }
 
+    let scrol =document.querySelector(".tituloQuizz");
+    scrol.scrollIntoView();
+}
 
+function escolheOpcao (elemento){
+    elemento.classList.add("escolha");
+    let pai=elemento.parentNode;
+    pai.classList.add ("clicado");
+    pai.classList.remove ("naoClicado");
+    let listaOpcoes=document.querySelectorAll(".clicado .opcao");
+    console.log(listaOpcoes);
+    for(let i =0;i<listaOpcoes.length;i++){
+       listaOpcoes[i].removeAttribute("onclick");
+        if(listaOpcoes[i].classList.contains("true")){
+            listaOpcoes[i].classList.add("verde");
+        }else{
+            listaOpcoes[i].classList.add("vermelho");
+        }
+       
+       
+        if(listaOpcoes[i].classList.contains("escolha")){
+            console.log("deu");
+        }else{
+            listaOpcoes[i].classList.add("branco");
+        }
+    }
+    setTimeout(proximaPergunta,2000);
+    
+}
+function proximaPergunta(){
+    let prox=document.querySelector(".naoClicado");
+    prox.scrollIntoView();
 }
