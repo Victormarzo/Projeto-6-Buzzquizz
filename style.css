@@ -16,7 +16,7 @@ body {
 }
 .page {
     width: 1051px;
-    height: 3000px;
+    
 }
 
 .banner {
@@ -36,6 +36,9 @@ body {
 .banner img {
     width: 174px;
     height: 43px;
+}
+.banner img:hover {
+    cursor: pointer;
 }
 .container-page {
     width: 100%;
@@ -72,7 +75,7 @@ body {
 .button-container {
     width: 100%;
     height: 200px;
-    margin-top: 140px;
+    margin-top: 77px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -141,7 +144,6 @@ body {
 
 .background {
     background:linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.1%, #000000 100%);
-    position: relative;
     max-width: 340px;
     max-height: 181px;
     border-radius: 5px;
@@ -155,7 +157,7 @@ body {
 
 }
 .quizzTodos {
-    margin-top: 110px;
+    margin-top: 77px;
     font-weight: 700;
     font-size: 20px;
     margin-bottom: 12px;
@@ -166,9 +168,13 @@ body {
 /* Design pagina2: */
 .tituloQuizz{
     width: 100%;
-    height: 227px;  
+    height: 227px; 
+    position: relative;
+    z-index: 1; 
 }
-
+.caixaTituloQuizz{
+    margin-top: 70px;
+}
 .caixaTitulo{
     display: flex;
     justify-content: center;
@@ -183,9 +189,16 @@ body {
     color: #FFFFFF;
     
 }
+
+.opaco{
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57))
+    
+}
 .tituloQuizz img{
     width: 100%;
     height: 227px;
+    position: relative;
+    z-index: -1;
     
 }
 .listaQuizz{
@@ -207,7 +220,6 @@ body {
 .perguntaQuizz{
     width: 700px;
     height: 138px;
-    background: #434CA0;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
@@ -218,6 +230,8 @@ body {
     font-size: 23px;
     line-height: 27px;
     color: #FFFFFF;
+    margin-top: 28px;
+    
 }
 .opcao img{
     width: 320px;
@@ -228,6 +242,7 @@ body {
 .opcao p{
     margin-top: 10px;
     margin-bottom: 20px;
+    width: 320px;
 }
 
 

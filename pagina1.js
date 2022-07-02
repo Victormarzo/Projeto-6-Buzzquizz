@@ -36,7 +36,7 @@ button();
 procuraQuizz();
 
 function procuraQuizz(){
-    const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
+    const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes")
     promise.then(carregaQuizz);
     promise.catch(error);
     
@@ -62,3 +62,6 @@ function carregaQuizz(resposta){
     
     `
 }}
+function reloadPage(){
+    document.location.reload(true);
+}
