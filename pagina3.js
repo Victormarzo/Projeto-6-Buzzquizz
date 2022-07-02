@@ -531,4 +531,3 @@ function postagemAPI() {
         </div>
         `
     }
-    quizzFinalizado()

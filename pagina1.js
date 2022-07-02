@@ -52,7 +52,7 @@ function carregaQuizz(resposta){
     </div>`
     
     let list=document.querySelector(".quizzList");
-    for( let i=0;i<6;i++){
+    for( let i=0;i<resposta.data.length;i++){
     list.innerHTML+= `
     
             
