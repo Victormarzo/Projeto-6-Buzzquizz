@@ -1,12 +1,18 @@
+let cont=0;
+let qtdPerguntas;
+let acertos=0;
+let resultadosP;
+let id;
+
 function abrePagina2(elemento){
-    console.log(elemento);
-    
+    //console.log(elemento);
+    id=elemento;
     const promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${elemento}`)
     promise.then(exibeQuizz);
     promise.catch(error);
 }
 function error(erro){
-    console.log(erro.response.status);
+    //console.log(erro.response.status);
 }
 function comparador() { 
 	return Math.random() - 0.5; 
@@ -15,9 +21,10 @@ function exibeQuizz(resposta){
     
     let titulo=document.querySelector(".caixaTituloQuizz");
     let quest=resposta.data.questions;
-    let resp=resposta.data.questions.answers;
+    
     let listaResposta =[];
-    console.log(resposta);
+    //console.log(resposta);
+    
     titulo.innerHTML=
     
     `
@@ -55,7 +62,6 @@ function exibeQuizz(resposta){
             <p>${quest[i].answers[y].text}</p>
             </div>
             `
-            
 
             listaResposta.push(respostaTemplate);
         }
@@ -68,7 +74,17 @@ function exibeQuizz(resposta){
 
     let scrol =document.querySelector(".tituloQuizz");
     scrol.scrollIntoView();
+
+    armazenaResultado(resposta);
 }
+function armazenaResultado(resposta){
+    qtdPerguntas= resposta.data.questions.length;
+    resultadosP =resposta.data.levels;
+    
+    
+}
+
+
 
 function escolheOpcao (elemento){
     elemento.classList.add("escolha");
@@ -76,7 +92,7 @@ function escolheOpcao (elemento){
     pai.classList.add ("clicado");
     pai.classList.remove ("naoClicado");
     let listaOpcoes=document.querySelectorAll(".clicado .opcao");
-    console.log(listaOpcoes);
+    
     for(let i =0;i<listaOpcoes.length;i++){
        listaOpcoes[i].removeAttribute("onclick");
         if(listaOpcoes[i].classList.contains("true")){
@@ -84,18 +100,68 @@ function escolheOpcao (elemento){
         }else{
             listaOpcoes[i].classList.add("vermelho");
         }
-       
-       
         if(listaOpcoes[i].classList.contains("escolha")){
-            console.log("deu");
+            
         }else{
             listaOpcoes[i].classList.add("branco");
         }
     }
+
+    if(elemento.classList.contains("true")){
+        acertos++;
+        
+    }
     setTimeout(proximaPergunta,2000);
     
+    cont++;
+    if(cont===qtdPerguntas){
+        setTimeout(exibeResultado,2000);}
 }
 function proximaPergunta(){
     let prox=document.querySelector(".naoClicado");
-    prox.scrollIntoView();
+    if(prox != null){
+        prox.scrollIntoView();
+}}
+
+function exibeResultado(){
+    let index=0;
+    let valor =0;
+    let porcentagem=Math.floor(acertos/qtdPerguntas*100);
+    
+    
+        for(let i =0;i<resultadosP.length;i++){
+            let valorMin=resultadosP[i].minValue;
+            
+            if(porcentagem>=valorMin){
+               if(valorMin>=valor){
+                valor=valorMin;
+                index=i;
+                console.log(porcentagem,valorMin,i,index);
+            }}
+            
+        }  
+        
+        pagina.innerHTML=
+            `
+                <div class="caixaResultado">
+                    <span class="tituloResultado"><p>${resultadosP[index].title}</p></span>
+                    <div class="resultado">
+                        <div class="caixa1"><img src="${resultadosP[index].image}" ></div>
+                        <span class="caixa2">
+                        <p>${resultadosP[index].text}</p>
+                        </span>
+                    </div>
+                </div>
+                <div class="botao"onclick="restartQuizz()">Reiniciar Quizz</div>
+                <div class="restart" onclick="restartPage()">Voltar pra Home</div>
+                
+                `
+
+    }
+function restartQuizz(){
+    abrePagina2(id);
+    cont=acertos=0;
+}
+function restartPage(){
+    window.location.reload();
 }
