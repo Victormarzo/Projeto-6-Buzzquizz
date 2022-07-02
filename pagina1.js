@@ -1,5 +1,4 @@
 
-
 function criaQuizz() {
     abrePagina3()
 }

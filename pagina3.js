@@ -1,3 +1,5 @@
+let tituloQuizz
+let imgQuizzURL
 let pagina = document.querySelector('.page')
 let quizzCriado = false
 let definicoesQuizz = []
@@ -5,10 +7,10 @@ let qntPerg = 0
 let perguntas = []
 let niveis = []
 let qntNiveis = 0
-let quest=resposta.data.questions;
-    let resp=resposta.data.questions.answers;
-
-
+let postNiveis
+let postPerguntas = []
+// let quest= resposta.data.questions;
+// let resp= resposta.data.questions.answers;
 //Pagina 3.1
 function abrePagina3() {
     pagina.innerHTML =
@@ -29,22 +31,22 @@ function abrePagina3() {
     scrollTop();
 }
 function guardaInputs() {
-    let titulo, url
+
     definicoesQuizz = []
     //Pega todos os inputs:
     let inputsList = pagina.querySelectorAll('input')
     inputsList.forEach(input => {
         definicoesQuizz.push(input.value)
     });
-    console.log(definicoesQuizz)
-    titulo = definicoesQuizz[0]
-    url = definicoesQuizz[1]
+    tituloQuizz = definicoesQuizz[0]
+    imgQuizzURL = definicoesQuizz[1]
     qntPerg = definicoesQuizz[2]
     qntNiveis = definicoesQuizz[3]
+
     //Passa os inputs para verificação:
-    verificaRequisitosCriacao(titulo, url, qntPerg)
+    verificaRequisitosCriacao()
 }
-function verificaRequisitosCriacao(titulo, url, qntPerg) {
+function verificaRequisitosCriacao() {
     let urlOK = true
     let tituloOK = false
     let qntPergOK = false
@@ -52,17 +54,17 @@ function verificaRequisitosCriacao(titulo, url, qntPerg) {
 
 
     //verifica se as informaçoes batem com os requisitos:
-    if (url !== "") {
-        if (isURL(url) === false) {
+    if (imgQuizzURL !== "") {
+        if (isURL(imgQuizzURL) === false) {
             urlOK = false;
             alert('O link não é válido')
         }
         else { urlOK = true };
     }
 
-    if (titulo.length >= 20 && titulo.length <= 65) {
+    if (tituloQuizz.length >= 20 && tituloQuizz.length <= 65) {
         tituloOK = true
-    } else if (titulo === "") { return } else { alert(`Seu título tem apenas ${titulo.length} caracteres, quando deveria ter entre 20 a 65 caracteres.`) }
+    } else if (tituloQuizz === "") { return } else { alert(`Seu título tem apenas ${tituloQuizz.length} caracteres, quando deveria ter entre 20 a 65 caracteres.`) }
 
     if (qntPerg >= 3) {
         qntPergOK = true
@@ -70,17 +72,16 @@ function verificaRequisitosCriacao(titulo, url, qntPerg) {
 
     if (qntNiveis >= 2) {
         qntNiveisOK = true
-    } else if (titulo === "") { return } else { alert('É necessário que se tenham ao menos dois niveis.') }
+    } else if (qntNiveis === "") { return } else { alert('É necessário que se tenham ao menos dois niveis.') }
 
     // Se tudo estiver ok:
     if (tituloOK === true && urlOK === true && qntPergOK === true && qntNiveisOK === true) {
-        crieSuasPerguntas(titulo, url)
+        crieSuasPerguntas()
     }
     console.log(urlOK)
-
 }
 //Pagina 3.2
-function crieSuasPerguntas(titulo, url) {
+function crieSuasPerguntas() {
     let perguntasHTML = ''
 
     for (let i = 1; i <= qntPerg; i++) {
@@ -157,6 +158,7 @@ function abreGaveta(caixa, caixaFechada) {
 function recebePerguntas() {
     perguntas = []
     let dataPerg = []
+    postPerguntas = []
 
     for (i = 1; i <= qntPerg; i++) {
         let pergunta = document.querySelector(`.pergunta${i}`);
@@ -177,6 +179,78 @@ function recebePerguntas() {
                 respostaIncorreta3: dataPerg[8],
                 urlDaImagem3: dataPerg[9]
             });
+        if (dataPerg[6] === "" && dataPerg[8] === "") {
+            postPerguntas.push(
+                {
+                    title: dataPerg[0],
+                    color: dataPerg[1],
+                    answers: [
+                        {
+                            text: dataPerg[2],
+                            image: dataPerg[3],
+                            isCorrectAnswer: true
+                        },
+                        {
+                            text: dataPerg[4],
+                            image: dataPerg[5],
+                            isCorrectAnswer: false
+                        }
+                    ]
+                },
+            );
+        }
+        if (dataPerg[6] !== "" && dataPerg[8] === "") {
+            postPerguntas.push(
+                {
+                    title: dataPerg[0],
+                    color: dataPerg[1],
+                    answers: [
+                        {
+                            text: dataPerg[2],
+                            image: dataPerg[3],
+                            isCorrectAnswer: true
+                        },
+                        {
+                            text: dataPerg[4],
+                            image: dataPerg[5],
+                            isCorrectAnswer: false
+                        },
+                        {
+                            text: dataPerg[6],
+                            image: dataPerg[7],
+                            isCorrectAnswer: false
+                        }
+                    ]
+                },
+            );
+        }
+        if (dataPerg[6] === "" && dataPerg[8] !== "") {
+            postPerguntas.push(
+                {
+                    title: dataPerg[0],
+                    color: dataPerg[1],
+                    answers: [
+                        {
+                            text: dataPerg[2],
+                            image: dataPerg[3],
+                            isCorrectAnswer: true
+                        },
+                        {
+                            text: dataPerg[4],
+                            image: dataPerg[5],
+                            isCorrectAnswer: false
+                        },
+                        {
+                            text: dataPerg[8],
+                            image: dataPerg[9],
+                            isCorrectAnswer: false
+                        }
+                    ]
+                },
+            );
+        }
+
+
         // limpa dataPerg para que ao voltar no inicio do loop, fiquem apenas as informações da próxima caixa de pergunta.
         dataPerg = [];
     }
@@ -192,45 +266,61 @@ function verificaRequisitosPerguntas() {
 
         if ((item.textoDaPergunta).length < 20 && item.textoDaPergunta !== "") {
             alert('O texto das perguntas devem ter no mínimo 20 caracteres. ')
+            tudoNosConformes--
         }
         if ((item.corDeFundoDaPergunta !== "") && ((item.corDeFundoDaPergunta).length !== 7 || item.corDeFundoDaPergunta[0] !== "#" || isHexadecimal === false)) {
             alert('Cor de fundo: deve ser uma cor em hexadecimal (começar em "#", seguida de 6 caracteres hexadecimais, ou seja, números ou letras de A a F)')
+            tudoNosConformes--
         }
         if ((item.urlDaImagem !== "") && (isURL(item.urlDaImagem) === false)) {
             alert(`O link da imagem da resposta correta na pergunta ${indice + 1} não é válido.`)
+            tudoNosConformes--
         }
         if ((item.urlDaImagem1 !== "") && (isURL(item.urlDaImagem1) === false)) {
             alert(`O link da imagem da resposta incorreta(1) na pergunta ${indice + 1} não é válido.`)
+            tudoNosConformes--
         }
         if ((item.urlDaImagem2 !== "") && (isURL(item.urlDaImagem2) === false)) {
             alert(`O link da imagem da resposta incorreta(2) na pergunta ${indice + 1} não é válido.`)
+            tudoNosConformes--
         }
         if ((item.urlDaImagem3 !== "") && (isURL(item.urlDaImagem3) === false)) {
             alert(`O link da imagem da resposta incorreta(3) na pergunta ${indice + 1} não é válido.`)
+            tudoNosConformes--
         }
         if (item.respostaCorreta !== "" && item.urlDaImagem === "") {
             alert(`Erro na pergunta(${indice + 1}): Adicione um URL. `)
+            tudoNosConformes--
         }
         if (item.respostaIncorreta1 !== "" && item.urlDaImagem1 === "") {
             alert(`Erro na pergunta(${indice + 1}): Adicione um URL na resposta incorreta 1. `)
+            tudoNosConformes--
         }
         if (item.respostaIncorreta2 !== "" && item.urlDaImagem2 === "") {
             alert(`Erro na pergunta(${indice + 1}): Adicione um URL na resposta incorreta 2. `)
+            tudoNosConformes--
         }
         if (item.respostaIncorreta3 !== "" && item.urlDaImagem3 === "") {
             alert(`Erro na pergunta(${indice + 1}): Adicione um URL na resposta incorreta 3. `)
+            tudoNosConformes--
         }
         if (item.textoDaPergunta === "" && (item.respostaCorreta !== "" || item.respostaIncorreta1 !== "")) {
             alert(`Erro na pergunta(${indice + 1}): veja o campo de texto da pergunta e tente novamente. `)
+            tudoNosConformes--
         }
         if (item.corDeFundoDaPergunta === "" && (item.textoDaPergunta !== "" || item.respostaCorreta !== "" || item.respostaIncorreta1 !== "")) {
             alert(`Erro na pergunta(${indice + 1}): adicione uma cor de fundo. `)
+            tudoNosConformes--
         }
         else {
             // adiciona +1 pra cada caixa de pergunta preenchida corretamente
             tudoNosConformes++
         }
     })
+    if (perguntas[0].textoDaPergunta === "" || perguntas[1].textoDaPergunta === "" || perguntas[2].textoDaPergunta === "") {
+        alert('Deve ter ao menos 3 perguntas preenchidas.')
+        tudoNosConformes--;
+    }
     console.log(tudoNosConformes, qntPerg)
     if (tudoNosConformes == qntPerg) {
 
@@ -323,6 +413,7 @@ function scrollTop() {
 function recebeNiveis() {
     niveis = []
     let dataInputs = []
+    postNiveis = []
 
     for (i = 1; i <= qntNiveis; i++) {
         let nivel = document.querySelector(`.nivel${i}`);
@@ -330,16 +421,42 @@ function recebeNiveis() {
         //salva em dataPerg apenas as informações de cada caixa de perguntas:
         inputsList.forEach(input => { dataInputs.push(input.value) });
         //coloca dento do perguntas um objeto com as informações do array anterior, para facilitar a manipulação:
+        if (dataInputs[1] === "") {
+            alert(`Adicione um numero válido no nivel${i}`)
+            return;
+        }
         niveis.push({
             tituloDoNivel: dataInputs[0],
             acertoMinimo: dataInputs[1],
             urlDaImagem: dataInputs[2],
             descNivel: dataInputs[3]
-        });
+        })
+        
+        if (i === qntNiveis){
+            postNiveis.push({
+                title: dataInputs[0],
+                image: dataInputs[2],
+                text: dataInputs[3],
+                minValue: dataInputs[1]
+            }
+            )
+        }
+        else {
+            postNiveis.push({
+                title: dataInputs[0],
+                image: dataInputs[2],
+                text: dataInputs[3],
+                minValue: dataInputs[1]
+            },
+            )
+        }
+        console.log(postNiveis)
+        ;
         // limpa inputsList para que ao voltar no inicio do loop, fiquem apenas as informações da próxima caixa de pergunta.
         dataInputs = [];
     }
     verificaNiveis()
+    console.log(niveis)
 }
 
 function verificaNiveis() {
@@ -348,21 +465,27 @@ function verificaNiveis() {
     niveis.forEach((item, index) => {
         if (item.tituloDoNivel !== "" && item.tituloDoNivel.length < 10) {
             alert(`Erro no nivel(${index + 1}): Título do nível deve ter no mínimo 10 caracteres. `)
+            tudoNosConformes--
         }
         if (item.acertoMinimo !== "" && (item.acertoMinimo > 100 || item.acertoMinimo < 0)) {
             alert(`Erro no nivel(${index + 1}): O numero deve estar entre 0 e 100. `)
+            tudoNosConformes--
         }
         if (item.urlDaImagem !== "" && (isURL(item.urlDaImagem) === false)) {
             alert(`Erro no nivel(${index + 1}): Deve inserir um URL válido. `)
+            tudoNosConformes--
         }
         if (item.descNivel !== "" && item.descNivel.length < 30) {
             alert(`Erro no nivel(${index + 1}): A descrição deve ter mais que 30 caracteres. `)
+            tudoNosConformes--
         }
         if (item.tituloDoNivel !== "" && item.urlDaImagem === "") {
             alert(`Erro no nivel(${index + 1}): Adicione um URL. `)
+            tudoNosConformes--
         }
         if (item.descNivel === "" && (item.acertoMinimo !== "" || item.tituloDoNivel !== "" || item.urlDaImagem !== "")) {
             alert(`Erro no nivel(${index + 1}): Adicione uma descrição. `)
+            tudoNosConformes--
         }
         if (item.acertoMinimo !== "" && (item.acertoMinimo == 0)) {
             tudoNosConformes++
@@ -373,8 +496,39 @@ function verificaNiveis() {
     })
     if (umNivel0 === false) {
         alert('Deve haver ao menos um nivel com 0% de acerto mínimo.')
+        return;
+    }
+    if ((niveis[0].tituloDoNivel === "" || niveis[0].descNivel === "" || niveis[0].descNivel === "") || (niveis[1].tituloDoNivel === "" || niveis[1].descNivel === "" || niveis[1].descNivel === "")) {
+        alert('Você deve preencher ao menos 2 niveis.')
+        return
     }
     if (tudoNosConformes == qntNiveis && umNivel0 === true) {
         alert('tudo certo')
+        postagemAPI()
     }
 }
+function postagemAPI() {
+    const quizz =
+    {
+            title: tituloQuizz,
+            image: imgQuizzURL,
+            questions: postPerguntas,
+            levels: postNiveis
+        };
+        let promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", quizz)
+        promise.then(quizzFinalizado)
+    }
+    
+    function quizzFinalizado(resposta){
+        quizzCriado = true
+        pagina.innerHTML =
+
+        `<div class="pagina3">
+        <h1>Seu quizz está pronto!</h1>
+        <div class="thumb" onclick="abrePagina2(${resposta.data.id})"><div class="background"><img src="${resposta.data.image}"></div><p>${resposta.data.title} </p></div>
+        <div onclick="abrePagina2(${resposta.data.id})" class="button">Prosseguir para criar níveis</div>
+        <h4 on click=""> Voltar para a home </h4> 
+        </div>
+        `
+    }
+    quizzFinalizado()
