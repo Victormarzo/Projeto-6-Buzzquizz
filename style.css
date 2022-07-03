@@ -489,7 +489,10 @@ body {
  }
  .loading {
      z-index: 3;
-     width: 50%;
+     width: 300px;
+ }
+ .pagina3 h5 {
+    color: red;
  }
 
 /* Funcoes com prioridade: */

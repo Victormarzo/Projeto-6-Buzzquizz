@@ -65,7 +65,6 @@ function error(erro){
 function carregaQuizz(resposta){
     document.querySelector('.background-loading').classList.add('hidden')
     
-    
     let uQuizzes = JSON.parse(userInfo)
     pagina.innerHTML+=`
     
