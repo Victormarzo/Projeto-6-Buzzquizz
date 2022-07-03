@@ -63,6 +63,9 @@ function error(erro){
     console.log(erro.response.status);
 }
 function carregaQuizz(resposta){
+    
+    
+    let uQuizzes = JSON.parse(userInfo)
     pagina.innerHTML+=`
     
     <div class="quizzTodos" <h1>Todos os Quizzes</h1></div>
@@ -72,11 +75,14 @@ function carregaQuizz(resposta){
     
     let list=document.querySelector(".quizzList");
     for( let i=0;i<resposta.data.length;i++){
-    list.innerHTML+= `
+       for (let y=0;y < uQuizzes.length;y++){
+        if(resposta.data[i].id !== uQuizzes[y].id){
+            list.innerHTML+= `
     
             
         
-    <div class="thumb" onclick="abrePagina2(${resposta.data[i].id})"><div class="background"><img src="${resposta.data[i].image}"></div><p>${resposta.data[i].title} </p></div>
+        <div class="thumb" onclick="abrePagina2(${resposta.data[i].id})"><div class="background"><img src="${resposta.data[i].image}"></div><p>${resposta.data[i].title} </p></div>
     
     `
-}}
+    }
+}}}
