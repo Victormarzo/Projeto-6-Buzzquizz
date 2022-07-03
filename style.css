@@ -498,12 +498,22 @@ input[type=number] {
     .page {
         width: 100%;
     }
-    .pagina3 input {
+    .pagina3 input, .pagina3 {
         display: flex;
         justify-content: center;
         width: 100%;
     }
     .pagina3 .caixa-defineQuizz, .pagina3 .caixa-pergunta, .caixa-nivel{
+        width: 100%;
+    }
+    .button-container{
+        margin: auto;
+        width: 90%;
+    }
+    .thumb {
+        width: 90%;
+    }
+    .container-quizz {
         width: 100%;
     }
 }
