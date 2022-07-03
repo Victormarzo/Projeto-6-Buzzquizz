@@ -1,7 +1,10 @@
+
 let tituloQuizz
 let imgQuizzURL
+let quizzCriado = localStorage.getItem("quizzCriado")
+let userInfo = localStorage.getItem("userQuizzes")
+let listaQuizzes = []
 let pagina = document.querySelector('.page')
-let quizzCriado = false
 let definicoesQuizz = []
 let qntPerg = 0
 let perguntas = []
@@ -520,14 +523,30 @@ function postagemAPI() {
     }
     
     function quizzFinalizado(resposta){
-        quizzCriado = true
         pagina.innerHTML =
 
         `<div class="pagina3">
         <h1>Seu quizz está pronto!</h1>
         <div class="thumb" onclick="abrePagina2(${resposta.data.id})"><div class="background"><img src="${resposta.data.image}"></div><p>${resposta.data.title} </p></div>
-        <div onclick="abrePagina2(${resposta.data.id})" class="button">Prosseguir para criar níveis</div>
-        <h4 on click=""> Voltar para a home </h4> 
+        <div onclick="abrePagina2(${resposta.data.id})" class="button">Acessar Quizz</div>
+        <h4 on onclick="restartPage()"> Voltar para a home </h4> 
         </div>
         `
+
+
+        if ( quizzCriado === "true"){
+            listaQuizzes = localStorage.getItem("userQuizzes")
+            listaQuizzes = JSON.parse(listaQuizzes)
+            listaQuizzes.push(resposta.data)
+            listaQuizzes = JSON.stringify(listaQuizzes)
+            localStorage.setItem("userQuizzes", listaQuizzes)
+        }
+        else {
+
+            listaQuizzes.push(resposta.data)
+            listaQuizzes = JSON.stringify(listaQuizzes)
+            localStorage.setItem("userQuizzes", listaQuizzes)
+        }
+            
+            quizzCriado = localStorage.setItem("quizzCriado", "true")
     }

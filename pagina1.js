@@ -3,12 +3,42 @@ function criaQuizz() {
     abrePagina3()
 }
 
-
 function button() {
-    if (quizzCriado === false) {
+    if(quizzCriado === "true" && userInfo === null){
+        quizzCriado = localStorage.setItem("quizzCriado", "false")
+    }
 
-        pagina.innerHTML =
-            `
+    if (quizzCriado === "true") {
+     let uQuizzes = JSON.parse(userInfo)
+     let userHTML = ''
+for ( let i = 0; i < uQuizzes.length; i++){
+    userHTML +=
+    `
+    <div class="thumb">
+        <div onclick="abrePagina2(${uQuizzes[i].id})"class="background"><img src="${uQuizzes[i].image}"></div>
+        <p>${uQuizzes[i].title} </p>
+    </div>
+    `
+}
+        pagina.innerHTML = 
+   
+        `
+    <div class="pagina1">
+        <div class="seus-quizzes">
+            <div onclick="abrePagina3()" class="small-button">
+                <h1>SeusQuizzes</h1>
+                <ion-icon onclick="abrePagina3()" name="add-circle"></ion-icon>
+            </div>
+            <div class="container-quizz">
+               ${userHTML} 
+            </div>
+        </div>
+    </div>
+        `
+    }
+    else {
+        pagina.innerHTML = 
+        `
             
             <div class="button-container">
                 <div>
@@ -17,17 +47,6 @@ function button() {
                 <button onclick="abrePagina3()">Criar Quizz</button>
             </div>
         
-        `
-    }
-    else {
-        pagina.innerHTML = 
-        `
-        <div class="pagina1">
-            <div class="small-button">
-                <h1>SeusQuizzes</h1>
-                <ion-icon onclick="abrePagina3()" name="add-circle"></ion-icon>
-            </div>
-        </div>
         `
     }
 }
@@ -61,6 +80,3 @@ function carregaQuizz(resposta){
     
     `
 }}
-function reloadPage(){
-    document.location.reload(true);
-}

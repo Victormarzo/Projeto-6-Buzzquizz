@@ -11,13 +11,15 @@ body {
     background-color: #ffffff;
     font-family: 'Roboto';
 }
-.conteudo{
+
+.conteudo {
     display: flex;
     justify-content: center;
 }
+
 .page {
     width: 1051px;
-    
+
 }
 
 .banner {
@@ -38,9 +40,11 @@ body {
     width: 174px;
     height: 43px;
 }
+
 .banner img:hover {
     cursor: pointer;
 }
+
 .container-page {
     width: 100%;
     display: flex;
@@ -58,12 +62,20 @@ body {
 .pagina1 .small-button {
     display: flex;
     align-items: center;
-    margin-top: 77px;
+}
+.pagina1 .small-button:hover {
+    cursor: pointer;
 }
 
 .pagina1 h1 {
     font-size: 23px;
     font-weight: 700;
+}
+.pagina1 .container-quizz{
+    width: 1051px;
+    display:flex;
+    gap: 10px;
+    overflow-x: scroll;
 }
 
 .pagina1 ion-icon {
@@ -121,6 +133,9 @@ body {
     z-index: 1;
     border-radius: 5px;
 }
+.listaQuizz img:hover {
+    cursor: pointer;
+}
 
 .thumb p {
     position: absolute;
@@ -145,19 +160,20 @@ body {
 }
 
 .background {
-    background:linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.1%, #000000 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.1%, #000000 100%);
     max-width: 340px;
     max-height: 181px;
     border-radius: 5px;
 }
 
 .quizzList {
-    
+
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 
 }
+
 .quizzTodos {
     margin-top: 77px;
     font-weight: 700;
@@ -168,58 +184,64 @@ body {
 
 
 /* Design pagina2: */
-.tituloQuizz{
+.tituloQuizz {
     width: 100%;
-    height: 227px; 
+    height: 227px;
     position: relative;
-    z-index: 1; 
+    z-index: 1;
 }
-.caixaTituloQuizz{
+
+.caixaTituloQuizz {
     margin-top: 70px;
 }
-.caixaTitulo{
+
+.caixaTitulo {
     display: flex;
     justify-content: center;
     align-items: center;
-    position:relative  ;
+    position: relative;
 }
-.tituloQuizz p{
+
+.tituloQuizz p {
     font-weight: 400;
     font-size: 39px;
     line-height: 46px;
     position: absolute;
     color: #FFFFFF;
-    
+
 }
 
-.opaco{
+.opaco {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57))
-    
 }
-.tituloQuizz img{
+
+.tituloQuizz img {
     width: 100%;
     height: 227px;
     position: relative;
     z-index: -1;
-    
+
 }
-.listaQuizz{
+
+.listaQuizz {
     margin-top: 70px;
 }
-.caixaQuizz{
-    width:759px;
-    
+
+.caixaQuizz {
+    width: 759px;
+
     margin-bottom: 42px;
     margin-left: auto;
     margin-right: auto;
-    background: #FFFFFF;    
+    background: #FFFFFF;
     margin-top: 28px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 
 }
-.perguntaQuizz{
+
+.perguntaQuizz {
     width: 700px;
     height: 138px;
     margin-left: auto;
@@ -233,56 +255,65 @@ body {
     line-height: 27px;
     color: #FFFFFF;
     margin-top: 28px;
-    
+
 }
-.opcao img{
+
+.opcao img {
     width: 320px;
     height: 175px;
     margin-left: auto;
     margin-right: auto;
 }
-.opcao p{
+
+.opcao p {
     margin-top: 10px;
     margin-bottom: 20px;
     width: 320px;
 }
-.vermelho{
+
+.vermelho {
     color: #FF4B4B;
 }
-.verde{
-    color:#009C22;
+
+.verde {
+    color: #009C22;
 }
-.branco{
+
+.branco {
     opacity: 0.3;
 }
-.caixaResultado{ 
-    width:759px;
+
+.caixaResultado {
+    width: 759px;
     margin-bottom: 55px;
     margin-left: auto;
     margin-right: auto;
-    background: #FFFFFF;    
+    background: #FFFFFF;
     padding: 18px;
 }
-.resultado{
-    display:flex;
+
+.resultado {
+    display: flex;
     justify-content: space-around;
     margin-right: auto;
     margin-left: auto;
 }
-.resultado img{
+
+.resultado img {
     width: 364px;
     height: 273px;
-    margin-top:18px;
+    margin-top: 18px;
     margin-right: 18px;
 }
-.resultado p{
+
+.resultado p {
     font-weight: 700;
     font-size: 19px;
     line-height: 25px;
     margin-top: 18px;
 }
 
-.tituloResultado{
+.tituloResultado {
     width: 100%;
     height: 99px;
     display: flex;
@@ -290,7 +321,7 @@ body {
     align-items: center;
     background: #EC362D;
     margin-left: auto;
-    margin-right: auto;    
+    margin-right: auto;
     font-style: normal;
     font-weight: 700;
     font-size: 23px;
@@ -298,8 +329,9 @@ body {
     color: #FFFFFF;
 
 }
-.botao{
-    
+
+.botao {
+
     width: 354px;
     height: 54px;
     background-color: #EC362D;
@@ -312,9 +344,10 @@ body {
     align-items: center;
     margin-left: auto;
     margin-right: auto;
-    
+
 }
-.restart{
+
+.restart {
     font-weight: 400;
     font-size: 21px;
     line-height: 25px;
@@ -325,14 +358,24 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: 18px;
-    margin-bottom:45px;
+    margin-bottom: 45px;
 }
+
 /* Design pagina3: */
 
 .pagina3 {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.pagina3 h4 {
+    color: #818181;
+    margin-top: 8px;
+    font-size: 21px;
+}
+.pagina3 h4:hover, .pagina3 .button, .button-container button:hover, .thumb:hover {
+    cursor: pointer;
 }
 
 .pagina3 h1 {
@@ -352,41 +395,52 @@ body {
     margin-bottom: 24px;
 }
 
-.caixa-pergunta, .caixa-nivel {
+.caixa-pergunta,
+.caixa-nivel {
     width: 600px;
     padding: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     margin-bottom: 24px;
 }
 
-.gaveta-perguntas div, .gaveta-niveis div {
+.gaveta-perguntas div,
+.gaveta-niveis div {
     margin-top: 28px;
     margin-bottom: 24px;
 }
+
 .gaveta-perguntas .input-change {
     margin-top: 20px;
     margin-bottom: 0;
     display: flex;
 }
+
 .input-change p {
     margin-right: 5px;
 }
+
 .input-change:hover {
     color: red;
     cursor: pointer;
 }
+
 .caixa-pergunta input,
-.caixa-defineQuizz input, .caixa-nivel input {
+.caixa-defineQuizz input,
+.caixa-nivel input {
+    font-family: 'roboto';
     width: 564px;
     height: 42px;
     margin-top: 12px;
     border-radius: 5px;
     border: 1px solid #d1d1d1;
-    font-style: italic;
-    color: #BABABA;
     font-size: 19px;
 }
-
+.caixa-pergunta input::placeholder,
+.caixa-defineQuizz input::placeholder,
+.caixa-nivel input::placeholder {
+    font-style: italic;
+    color: #BABABA;
+}
 .pagina3 .button {
     margin-top: 80px;
     width: 354px;
@@ -424,15 +478,15 @@ body {
 .hidden {
     display: none;
 }
+
 /* Chrome, Safari, Edge, Opera  RETIRA ARROWS DO INPUT DE NUMERO*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Firefox RETIRA ARROWS DO INPUT DE NUMERO*/
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
-
