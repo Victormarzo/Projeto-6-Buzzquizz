@@ -346,6 +346,9 @@ body {
     margin-right: auto;
 
 }
+.botao,.restart:hover {
+    cursor: pointer;
+}
 
 .restart {
     font-weight: 400;

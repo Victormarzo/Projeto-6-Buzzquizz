@@ -115,13 +115,24 @@ function escolheOpcao (elemento){
     
     cont++;
     if(cont===qtdPerguntas){
-        setTimeout(exibeResultado,2000);}
+        setTimeout(exibeResultado,2000);
+        
+    
+    }
+
 }
 function proximaPergunta(){
     let prox=document.querySelector(".naoClicado");
     if(prox != null){
         prox.scrollIntoView();
 }}
+function mostraResultado(){
+    let prox=document.querySelector(".caixaResultado");
+    if(prox != null){
+        prox.scrollIntoView();
+}}
+
+
 
 function exibeResultado(){
     let index=0;
@@ -141,7 +152,7 @@ function exibeResultado(){
             
         }  
         
-        pagina.innerHTML=
+        pagina.innerHTML+=
             `
                 <div class="caixaResultado">
                     <span class="tituloResultado"><p>${resultadosP[index].title}</p></span>
@@ -156,7 +167,8 @@ function exibeResultado(){
                 <div class="restart" onclick="restartPage()">Voltar pra Home</div>
                 
                 `
-
+        mostraResultado();
+        
     }
 function restartQuizz(){
     abrePagina2(id);
