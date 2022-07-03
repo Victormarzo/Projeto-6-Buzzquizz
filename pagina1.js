@@ -76,7 +76,7 @@ function carregaQuizz(resposta){
     let list=document.querySelector(".quizzList");
     for( let i=0;i<resposta.data.length;i++){
        for (let y=0;y < uQuizzes.length;y++){
-        if(resposta.data[i].id !== uQuizzes[y].id){
+        if((resposta.data[i].id !== uQuizzes[y].id)||uQuizzes==null){
             list.innerHTML+= `
     
             
