@@ -252,6 +252,36 @@ function recebePerguntas() {
                 },
             );
         }
+        if (dataPerg[6] !== "" && dataPerg[8] !== "") {
+            postPerguntas.push(
+                {
+                    title: dataPerg[0],
+                    color: dataPerg[1],
+                    answers: [
+                        {
+                            text: dataPerg[2],
+                            image: dataPerg[3],
+                            isCorrectAnswer: true
+                        },
+                        {
+                            text: dataPerg[4],
+                            image: dataPerg[5],
+                            isCorrectAnswer: false
+                        },
+                        {
+                            text: dataPerg[6],
+                            image: dataPerg[7],
+                            isCorrectAnswer: false
+                        },
+                        {
+                            text: dataPerg[8],
+                            image: dataPerg[9],
+                            isCorrectAnswer: false
+                        }
+                    ]
+                },
+            );
+        }
 
 
         // limpa dataPerg para que ao voltar no inicio do loop, fiquem apenas as informações da próxima caixa de pergunta.
@@ -403,7 +433,7 @@ function crieSeusNiveis() {
 <div class="pagina3">
     <h1>Agora, decida os níveis</h1>
     ${niveisHTML}
-    <div onclick="recebeNiveis()" class="button">Prosseguir para criar níveis</div>
+    <div onclick="recebeNiveis()" class="button">Finalizar Quizz</div>
 </div>
 `
     document.querySelector('.gaveta-titulo').classList.add('hidden')
@@ -506,7 +536,6 @@ function verificaNiveis() {
         return
     }
     if (tudoNosConformes == qntNiveis && umNivel0 === true) {
-        alert('tudo certo')
         postagemAPI()
     }
 }
