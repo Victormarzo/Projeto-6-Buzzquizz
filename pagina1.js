@@ -63,6 +63,7 @@ function error(erro){
     console.log(erro.response.status);
 }
 function carregaQuizz(resposta){
+    document.querySelector('.background-loading').classList.add('hidden')
     
     
     let uQuizzes = JSON.parse(userInfo)

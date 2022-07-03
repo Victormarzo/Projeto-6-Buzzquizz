@@ -540,6 +540,7 @@ function verificaNiveis() {
     }
 }
 function postagemAPI() {
+    document.querySelector('.background-loading').classList.remove('hidden')
     const quizz =
     {
             title: tituloQuizz,
@@ -552,6 +553,7 @@ function postagemAPI() {
     }
     
     function quizzFinalizado(resposta){
+        document.querySelector('.background-loading').classList.add('hidden')
         pagina.innerHTML =
 
         `<div class="pagina3">
