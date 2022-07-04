@@ -74,22 +74,26 @@ function carregaQuizz(resposta){
     </div>`
     
     let list=document.querySelector(".quizzList");
+
     for( let i=0;i<resposta.data.length;i++){
-       if(uQuizzes!==null){
-        for (let y=0;y < uQuizzes.length;y++){
-        if(resposta.data[i].id !== uQuizzes[y].id){
-            list.innerHTML+= `
+        if(uQuizzes!==null){
+        let contador=0;
+        for (let y=0;y < uQuizzes.length;y++){ 
+        if(resposta.data[i].id === uQuizzes[y].id){
+            contador++;
+
+            }
+        }
+        if(contador===0){
+            list.innerHTML+= 
+            `
+                <div class="thumb" onclick="abrePagina2(${resposta.data[i].id})">
+                <div class="background"><img src="${resposta.data[i].image}"></div>
+                <p>${resposta.data[i].title} </p>
+                </div>
     
-            
-        
-        <div class="thumb" onclick="abrePagina2(${resposta.data[i].id})">
-        <div class="background"><img src="${resposta.data[i].image}"></div>
-        <p>${resposta.data[i].title} </p>
-        </div>
-    
-    `
-    }}
-}else{
+             `
+        }}else{
     list.innerHTML+= `
 
         <div class="thumb" onclick="abrePagina2(${resposta.data[i].id})">
@@ -98,8 +102,8 @@ function carregaQuizz(resposta){
         </div>
     
     `
-}
+        
 
-
+    }
 
 }}

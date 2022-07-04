@@ -5,7 +5,7 @@ let resultadosP;
 let id;
 
 function abrePagina2(elemento){
-    //console.log(elemento);
+    console.log(elemento);
     id=elemento;
     const promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${elemento}`)
     promise.then(exibeQuizz);
@@ -155,7 +155,7 @@ function exibeResultado(){
         pagina.innerHTML+=
             `
                 <div class="caixaResultado">
-                    <span class="tituloResultado"><p>${resultadosP[index].title}</p></span>
+                    <span class="tituloResultado"><p>${porcentagem}% de acerto:${resultadosP[index].title}</p></span>
                     <div class="resultado">
                         <div class="caixa1"><img src="${resultadosP[index].image}" ></div>
                         <div class="caixa2">

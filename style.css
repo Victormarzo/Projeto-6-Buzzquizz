@@ -74,8 +74,8 @@ body {
 .pagina1 .container-quizz{
     width: 100%;
     display:flex;
-    gap: 10px;
-    overflow-x: scroll;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .pagina1 ion-icon {
@@ -180,6 +180,7 @@ body {
     font-size: 20px;
     margin-bottom: 12px;
 }
+
 
 
 
@@ -552,10 +553,16 @@ input[type=number] {
     .pagina1 .small-button {
         justify-content: space-between;
     }
-    .pagina1,.perguntaQuizz{
+    .pagina1{
         max-width: 100%;
         margin-top: 0;
     }
+    .perguntaQuizz{
+        width: 100%;
+        margin-top: 0;
+    }
+
+
     .seus-quizzes{
         min-width: 100%;
     }
@@ -596,6 +603,9 @@ input[type=number] {
     .resultado img {
         width: 100%;
         
+    }
+    .pagina3 h1{
+        margin-top: 0;
     }
 
 }
