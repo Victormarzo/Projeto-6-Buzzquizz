@@ -158,9 +158,9 @@ function exibeResultado(){
                     <span class="tituloResultado"><p>${resultadosP[index].title}</p></span>
                     <div class="resultado">
                         <div class="caixa1"><img src="${resultadosP[index].image}" ></div>
-                        <span class="caixa2">
+                        <div class="caixa2">
                         <p>${resultadosP[index].text}</p>
-                        </span>
+                        </div>
                     </div>
                 </div>
                 <div class="botao"onclick="restartQuizz()">Reiniciar Quizz</div>
