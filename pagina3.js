@@ -23,9 +23,13 @@ function abrePagina3() {
             <div class="caixa-defineQuizz">
                 <div>
                     <input placeholder="Título do seu quizz" type="text">
+                    <h5></h5>
                     <input placeholder="URL da imagem do seu quizz" type="text">
+                    <h5></h5>
                     <input placeholder="Quantidade de perguntas do quizz" type="number">
+                    <h5></h5>
                     <input placeholder="Quantidade de níveis do quizz" type="number">
+                    <h5></h5>
                 </div>
             </div>
             <div onclick="guardaInputs()" class="button">Prosseguir para criar perguntas</div>
@@ -60,22 +64,25 @@ function verificaRequisitosCriacao() {
     if (imgQuizzURL !== "") {
         if (isURL(imgQuizzURL) === false) {
             urlOK = false;
-            alert('O link não é válido')
+            document.querySelector('h5:nth-of-type(2)').innerText = 'O link não é válido'
         }
         else { urlOK = true };
     }
 
     if (tituloQuizz.length >= 20 && tituloQuizz.length <= 65) {
         tituloOK = true
-    } else if (tituloQuizz === "") { return } else { alert(`Seu título tem apenas ${tituloQuizz.length} caracteres, quando deveria ter entre 20 a 65 caracteres.`) }
+    } else if (tituloQuizz === "") { return } 
+    else { 
+        document.querySelector('h5').innerText = `Seu título tem apenas ${tituloQuizz.length} caracteres, quando deveria ter entre 20 a 65 caracteres.`
+    }
 
     if (qntPerg >= 3) {
         qntPergOK = true
-    } else if (qntPerg === "") { return } else { alert('A quantidade de perguntas deve ter no mínimo três perguntas.') }
+    } else if (qntPerg === "") { return } else { document.querySelector('h5:nth-of-type(3)').innerText ='A quantidade de perguntas deve ter no mínimo três perguntas.' }
 
     if (qntNiveis >= 2) {
         qntNiveisOK = true
-    } else if (qntNiveis === "") { return } else { alert('É necessário que se tenham ao menos dois niveis.') }
+    } else if (qntNiveis === "") { return } else { document.querySelector('h5:nth-of-type(4)').innerText ='É necessário que se tenham ao menos dois niveis.' }
 
     // Se tudo estiver ok:
     if (tituloOK === true && urlOK === true && qntPergOK === true && qntNiveisOK === true) {
@@ -99,28 +106,38 @@ function crieSuasPerguntas() {
                     <div>
                         <h1>Pergunta ${i}</h1> 
                         <input placeholder="Texto da pergunta" type="text">
+                        <h5></h5>
                         <div onclick="trocaInput(this)" class="input-change">
                         <p> Alternar input </p> <ion-icon name="eyedrop"></ion-icon>
                         </div>
                         <input placeholder="Cor de fundo da pergunta" type="text" class= "input-color">
+                        <h5></h5>
                     </div>
-                    <div>
+                    <div class= "resposta-correta">
                         <h1>Resposta correta</h1>
                         <input placeholder="Resposta correta" type="text">
+                        <h5></h5>
                         <input placeholder="URL da imagem" type="text">
+                        <h5></h5>
                     </div>
-                    <div>
+                    <div class= "resposta-incorreta">
                         <h1>Respostas incorretas</h1>
                         <input placeholder="Resposta incorreta 1" type="text">
+                        <h5></h5>
                         <input placeholder="URL da imagem 1" type="text">
+                        <h5></h5>
                     </div>
-                    <div>
+                    <div class= "resposta-incorreta2">
                         <input placeholder="Resposta incorreta 2" type="text">
+                        <h5></h5>
                         <input placeholder="URL da imagem 2" type="text">
+                        <h5></h5>
                     </div>
-                    <div>
+                    <div class= "resposta-incorreta3">
                         <input placeholder="Resposta incorreta 3" type="text">
+                        <h5></h5>
                         <input placeholder="URL da imagem 3" type="text">
+                        <h5></h5>
                     </div>
                 </div>
             </div>
@@ -295,30 +312,31 @@ function verificaRequisitosPerguntas() {
     let tudoNosConformes = 0
     //Verifica requisitos:
     perguntas.forEach((item, indice) => {
+        let perg = document.querySelector(`.pergunta${indice+1}`)
         let isHexadecimal = verificaHexadecimial(item.corDeFundoDaPergunta)
 
         if ((item.textoDaPergunta).length < 20 && item.textoDaPergunta !== "") {
-            alert('O texto das perguntas devem ter no mínimo 20 caracteres. ')
+            perg.querySelector('h5:nth-of-type(1)').innerText = 'O texto das perguntas devem ter no mínimo 20 caracteres. '
             tudoNosConformes--
         }
         if ((item.corDeFundoDaPergunta !== "") && ((item.corDeFundoDaPergunta).length !== 7 || item.corDeFundoDaPergunta[0] !== "#" || isHexadecimal === false)) {
-            alert('Cor de fundo: deve ser uma cor em hexadecimal (começar em "#", seguida de 6 caracteres hexadecimais, ou seja, números ou letras de A a F)')
+            perg.querySelector('h5:nth-of-type(2)').innerText = 'Cor de fundo: deve ser uma cor em hexadecimal (começar em "#", seguida de 6 caracteres hexadecimais, ou seja, números ou letras de A a F) '
             tudoNosConformes--
         }
         if ((item.urlDaImagem !== "") && (isURL(item.urlDaImagem) === false)) {
-            alert(`O link da imagem da resposta correta na pergunta ${indice + 1} não é válido.`)
+            perg.querySelector('.resposta-correta h5:nth-of-type(2)').innerText = `O link da imagem não é válido.`
             tudoNosConformes--
         }
         if ((item.urlDaImagem1 !== "") && (isURL(item.urlDaImagem1) === false)) {
-            alert(`O link da imagem da resposta incorreta(1) na pergunta ${indice + 1} não é válido.`)
+            perg.querySelector('.resposta-incorreta h5:nth-of-type(2)').innerText = `O link da imagem não é válido.`
             tudoNosConformes--
         }
         if ((item.urlDaImagem2 !== "") && (isURL(item.urlDaImagem2) === false)) {
-            alert(`O link da imagem da resposta incorreta(2) na pergunta ${indice + 1} não é válido.`)
+            perg.querySelector('.resposta-incorreta2 h5:nth-of-type(2)').innerText = `O link da imagem não é válido.`
             tudoNosConformes--
         }
         if ((item.urlDaImagem3 !== "") && (isURL(item.urlDaImagem3) === false)) {
-            alert(`O link da imagem da resposta incorreta(3) na pergunta ${indice + 1} não é válido.`)
+            perg.querySelector('.resposta-incorreta3 h5:nth-of-type(2)').innerText = `O link da imagem não é válido.`
             tudoNosConformes--
         }
         if (item.respostaCorreta !== "" && item.urlDaImagem === "") {
@@ -420,9 +438,13 @@ function crieSeusNiveis() {
         <div>
             <h1>Nivel ${i}</h1>
             <input placeholder="Título do nível" type="text">
+            <h5></h5>
             <input placeholder="% de acerto mínima" type="number">
+            <h5></h5>
             <input placeholder="URL da imagem do nível" type="text">
+            <h5></h5>
             <input placeholder="Descrição do nível" type="text">
+            <h5></h5>
         </div>
     </div>
 </div>
@@ -454,10 +476,6 @@ function recebeNiveis() {
         //salva em dataPerg apenas as informações de cada caixa de perguntas:
         inputsList.forEach(input => { dataInputs.push(input.value) });
         //coloca dento do perguntas um objeto com as informações do array anterior, para facilitar a manipulação:
-        if (dataInputs[1] === "") {
-            alert(`Adicione um numero válido no nivel${i}`)
-            return;
-        }
         niveis.push({
             tituloDoNivel: dataInputs[0],
             acertoMinimo: dataInputs[1],
@@ -496,20 +514,21 @@ function verificaNiveis() {
     let umNivel0 = false
     let tudoNosConformes = 0
     niveis.forEach((item, index) => {
+        let niv = document.querySelector(`.nivel${index+1}`)
         if (item.tituloDoNivel !== "" && item.tituloDoNivel.length < 10) {
-            alert(`Erro no nivel(${index + 1}): Título do nível deve ter no mínimo 10 caracteres. `)
+            niv.querySelector('h5:nth-of-type(1)').innerText = `Erro no nivel: Título do nível deve ter no mínimo 10 caracteres. `
             tudoNosConformes--
         }
         if (item.acertoMinimo !== "" && (item.acertoMinimo > 100 || item.acertoMinimo < 0)) {
-            alert(`Erro no nivel(${index + 1}): O numero deve estar entre 0 e 100. `)
+            niv.querySelector('h5:nth-of-type(2)').innerText = `Erro no nivel: O numero deve estar entre 0 e 100. `
             tudoNosConformes--
         }
         if (item.urlDaImagem !== "" && (isURL(item.urlDaImagem) === false)) {
-            alert(`Erro no nivel(${index + 1}): Deve inserir um URL válido. `)
+            niv.querySelector('h5:nth-of-type(3)').innerText = `Erro no nivel: Deve inserir um URL válido. `
             tudoNosConformes--
         }
         if (item.descNivel !== "" && item.descNivel.length < 30) {
-            alert(`Erro no nivel(${index + 1}): A descrição deve ter mais que 30 caracteres. `)
+            niv.querySelector('h5:nth-of-type(4)').innerText =`Erro no nivel: A descrição deve ter mais que 30 caracteres. `
             tudoNosConformes--
         }
         if (item.tituloDoNivel !== "" && item.urlDaImagem === "") {
@@ -540,6 +559,7 @@ function verificaNiveis() {
     }
 }
 function postagemAPI() {
+    document.querySelector('.background-loading').classList.remove('hidden')
     const quizz =
     {
             title: tituloQuizz,
@@ -552,6 +572,7 @@ function postagemAPI() {
     }
     
     function quizzFinalizado(resposta){
+        document.querySelector('.background-loading').classList.add('hidden')
         pagina.innerHTML =
 
         `<div class="pagina3">
